@@ -233,6 +233,9 @@ INSERT INTO Venues VALUES ('Biodome', '4777 Pierre-de Coubertin Ave');
 INSERT INTO Venues VALUES ('Upstairs Jazz Bar', '1254 Mackay St');
 INSERT INTO Venues VALUES ('Tokyo Bar', '3709 St Laurent Blvd');
 INSERT INTO Venues VALUES ('Cafe Campus', '57 Rue Prince Arthur E');
+INSERT INTO Venues VALUES ('Parc La Fontaine', '1619 QC-138');
+INSERT INTO Venues VALUES ('Mount Royal', 'Mount Royal');
+INSERT INTO Venues VALUES ('Beaver Lake', 'Beaver Lake');
 
 INSERT INTO Categories VALUES('food')
 INSERT INTO Categories VALUES('club')
