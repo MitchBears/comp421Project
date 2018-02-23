@@ -243,5 +243,15 @@ INSERT INTO Payments VALUES (2, '3709 St Laurent Blvd', 'Tokyo Bar', '7/30/18', 
 INSERT INTO Payments VALUES (3, '625 Saint-Catherine St W', 'McDonalds', '4/20/18', 70);
 INSERT INTO Payments VALUES (4, '2055 Peel St', 'Universel Dejeuner Bar and Grill', '8/15/2018', 1650);
 
+INSERT INTO Categories VALUES('food')
+INSERT INTO Categories VALUES('club')
+INSERT INTO Categories VALUES('fitness')
+INSERT INTO Categories VALUES('music')
+INSERT INTO Categories VALUES('bar')
+INSERT INTO Categories VALUES('nature')
+INSERT INTO Categories VALUES('theatre')
+INSERT INTO Categories VALUES('movie')
+INSERT INTO Categories VALUES('dance')
+INSERT INTO Categories VALUES('sports')
 
 END
