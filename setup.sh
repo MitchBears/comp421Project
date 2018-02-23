@@ -237,5 +237,11 @@ INSERT INTO Venues VALUES ('Parc La Fontaine', '1619 QC-138');
 INSERT INTO Venues VALUES ('Mount Royal', 'Mount Royal');
 INSERT INTO Venues VALUES ('Beaver Lake', 'Beaver Lake');
 
+INSERT INTO Payments VALUES (0, '1254 Mackay St', 'Upstairs Jazz Bar', '7/20/18', 1500);
+INSERT INTO Payments VALUES (1, '1254 Mackay St', 'Upstairs Jazz Bar', '7/21/18', 1738);
+INSERT INTO Payments VALUES (2, '3709 St Laurent Blvd', 'Tokyo Bar', '7/30/18', 1900);
+INSERT INTO Payments VALUES (3, '625 Saint-Catherine St W', 'McDonalds', '4/20/18', 70);
+INSERT INTO Payments VALUES (4, '2055 Peel St', 'Universel Dejeuner Bar and Grill', '8/15/2018', 1650);
+
 
 END
