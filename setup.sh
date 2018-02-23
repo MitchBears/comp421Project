@@ -234,5 +234,16 @@ INSERT INTO Venues VALUES ('Upstairs Jazz Bar', '1254 Mackay St');
 INSERT INTO Venues VALUES ('Tokyo Bar', '3709 St Laurent Blvd');
 INSERT INTO Venues VALUES ('Cafe Campus', '57 Rue Prince Arthur E');
 
+INSERT INTO Categories VALUES('food')
+INSERT INTO Categories VALUES('club')
+INSERT INTO Categories VALUES('fitness')
+INSERT INTO Categories VALUES('music')
+INSERT INTO Categories VALUES('bar')
+INSERT INTO Categories VALUES('nature')
+INSERT INTO Categories VALUES('theatre')
+INSERT INTO Categories VALUES('movie')
+INSERT INTO Categories VALUES('dance')
+INSERT INTO Categories VALUES('sports')
 
+ 
 END
