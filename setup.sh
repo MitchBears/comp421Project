@@ -126,5 +126,13 @@ INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,gen
 INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,genderPreference,age) VALUES ('Meadows','Dylan','Curabitur.consequat.lectus@eterosProin.net',2302,'1-514-172-1149','Male','None',73),('Carter','Cheyenne','vulputate.lacus.Cras@ametfaucibus.ca',1505,'1-514-330-6849','Other','Male',57),('Castaneda','Kibo','non.hendrerit@lobortistellusjusto.edu',2413,'1-514-324-5698','Male','None',31),('Cleveland','Sopoline','volutpat.ornare@ut.ca',1642,'1-514-680-2525','Male','Female',28),('Acosta','Anika','id.nunc.interdum@massanon.com',1079,'1-514-492-6286','Female','Female',18),('Harmon','Beau','Duis.volutpat.nunc@diamPellentesquehabitant.com',1323,'1-514-285-6503','Female','None',69),('Gill','Piper','euismod.in.dolor@eunullaat.edu',379,'1-514-911-4713','Male','Male',32),('Callahan','Eliana','odio@Nuncut.net',4894,'1-514-803-2945','Male','Male',55),('Lowery','Owen','eu@interdumenim.com',3300,'1-514-364-0211','Male','Female',60),('Britt','Shaeleigh','porttitor.eros.nec@tellussem.co.uk',3262,'1-514-911-8111','Male','Female',19);
 INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,genderPreference,age) VALUES ('Chan','Jolie','ac.metus.vitae@enimEtiam.ca',3176,'1-514-771-9000','Other','Female',53),('Chang','Nicholas','risus.Duis.a@aaliquet.ca',3814,'1-514-266-0115','Male','None',44),('Lamb','Alan','ipsum.Phasellus.vitae@gravidamauris.net',3833,'1-514-828-9451','Other','None',67),('Rosa','Hoyt','dui.semper@mattis.co.uk',4990,'1-514-817-6907','Male','Male',35),('Mccullough','Maryam','lacinia.vitae.sodales@tristiquepellentesque.co.uk',519,'1-514-749-9954','Male','Male',51),('Quinn','Cole','Quisque.libero@tristiquepharetra.edu',2655,'1-514-611-3730','Male','Female',65),('Atkins','Maxwell','eu@turpisIncondimentum.edu',1808,'1-514-478-0237','Male','Female',65),('Skinner','Carissa','dictum.Proin@risusQuisquelibero.com',984,'1-514-782-3743','Male','None',37),('Meyer','Grace','imperdiet.non@commodohendrerit.co.uk',4264,'1-514-904-9730','Male','None',46),('Horne','Ralph','posuere.cubilia.Curae@tincidunt.ca',2580,'1-514-774-2232','Male','None',26);
 
+INSERT INTO Venues VALUES('Universel Dejeuner Bar and Grill', '2055 Peel St');
+INSERT INTO Venues VALUES ('McDonalds', '625 Saint-Catherine St W');
+INSERT INTO Venues VALUES ('Burger King', '977 Saint-Catherine St W');
+INSERT INTO Venues VALUES ('Biodome', '4777 Pierre-de Coubertin Ave');
+INSERT INTO Venues VALUES ('Upstairs Jazz Bar', '1254 Mackay St');
+INSERT INTO Venues VALUES ('Tokyo Bar', '3709 St Laurent Blvd');
+INSERT INTO Venues VALUES ('Cafe Campus', '57 Rue Prince Arthur E');
+
 
 END
