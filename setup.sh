@@ -243,6 +243,15 @@ INSERT INTO Payments VALUES (2, '3709 St Laurent Blvd', 'Tokyo Bar', '7/30/18', 
 INSERT INTO Payments VALUES (3, '625 Saint-Catherine St W', 'McDonalds', '4/20/18', 70);
 INSERT INTO Payments VALUES (4, '2055 Peel St', 'Universel Dejeuner Bar and Grill', '8/15/2018', 1650);
 
+INSERT INTO Activities VALUES('Burgers for Lunch', '8/7/2018', '12:30', '13:30', '977 Saint-Catherine St W', 'Burger King', 15);
+INSERT INTO Activities VALUES('Biodome Walk', '8/7/2018', '14:30', '17:30', '4777 Pierre-de Coubertin Ave', 'Biodome', 20);
+INSERT INTO Activities VALUES('Dinner and Jazz', '3/30/2018', '19:30', '22:30', '1254 Mackay St', 'Upstairs Jazz Bar', 14);
+INSERT INTO Activities VALUES('Skating on Beaver Lake', '8/1/2018', '14:00', '15:30', 'Beaver Lake', 'Beaver Lake', 0);
+INSERT INTO Activities VALUES('Hike to Beaver Lake', '8/1/2018', '13:00', '14:00', 'Mount Royal', 'Mount Royal', 0);
+INSERT INTO Activities VALUES('Burgers for Lunch', '8/1/2018', '12:00', '13:00', '625 Saint-Catherine St W', 'McDonalds', 0);
+INSERT INTO Activities VALUES('Clubbing at Cafe Campus', '7/5/2018', '23:00', '01:00', '57 Rue Prince Arthur E', 'Cafe Campus', 8);
+INSERT INTO Activities VALUES('Breakfast Buffet', '4/9/2018', '09:00', '11:00', '2055 Peel St', 'Universel Dejeuner Bar and Grill', 20);
+
 INSERT INTO Categories VALUES('food')
 INSERT INTO Categories VALUES('club')
 INSERT INTO Categories VALUES('fitness')
