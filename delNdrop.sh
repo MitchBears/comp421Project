@@ -7,12 +7,12 @@ DROP TABLE Activities CASCADE;
 DROP TABLE Reviews CASCADE;
 DROP TABLE Venues CASCADE;
 DROP TABLE Payments CASCADE;
-DROP TABLE UserPrefersCategories CASCADE;
-DROP TABLE Availability CASCADE;
-DROP TABLE VenueAvailability CASCADE;
+DROP TABLE UserPrefersCategory CASCADE;
+DROP TABLE Availabilities CASCADE;
+DROP TABLE VenueAvailabilities CASCADE;
 DROP TABLE ActivityCategories CASCADE;
 DROP TABLE DateActivities CASCADE;
-DROP TABLE UserAvailability CASCADE;
+DROP TABLE UserAvailabilities CASCADE;
 DROP TABLE VenueHasAvailability CASCADE;
 
 END
