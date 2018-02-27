@@ -1,130 +1,130 @@
 psql cs421 --echo-all <<-END 2>&1 | tee setup.log
 
 CREATE TABLE Categories (
-    categoryName VARCHAR(35),
+    categoryName VARCHAR(35) NOT NULL,
     PRIMARY KEY(categoryName)
 );
 
 CREATE TABLE Users (
-    emailAddress VARCHAR(50) PRIMARY KEY,
+    emailAddress VARCHAR(50) PRIMARY KEY NOT NULL,
     gender VARCHAR(6),
     genderPreference VARCHAR(6),
-    age INT,
-    budget INT,
-    phoneNumber CHAR(14),
+    age INT NOT NULL CHECK(age > 17),
+    budget INT CHECK(budget > 0),
+    phoneNumber CHAR(14) NOT NULL,
     lastName VARCHAR(30),
-    firstName VARCHAR(30)
+    firstName VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE Dates (
-	userOneEmailAddress VARCHAR(50) REFERENCES Users,
-	userTwoEmailAddress VARCHAR(50) REFERENCES Users,
-	date DATE,
-	startTime VARCHAR(5),
+	userOneEmailAddress VARCHAR(50) NOT NULL REFERENCES Users,
+	userTwoEmailAddress VARCHAR(50) NOT NULL REFERENCES Users,
+	date DATE NOT NULL,
+	startTime VARCHAR(5) NOT NULL,
 	endTime VARCHAR(5),
-	netPrice INT,
+	netPrice INT CHECK(netPrice >= 0),
 	PRIMARY KEY(userOneEmailAddress, userTwoEmailAddress, date, startTime)
 );
 
 CREATE TABLE Venues (
-	name VARCHAR(50),
-	address VARCHAR(75),
+	name VARCHAR(50) NOT NULL,
+	address VARCHAR(75) NOT NULL,
 	PRIMARY KEY (name, address)
 );
 
 CREATE TABLE Activities (
-	name VARCHAR(50),
-	date DATE,
-	startTime VARCHAR(5),
+	name VARCHAR(50) NOT NULL,
+	date DATE NOT NULL,
+	startTime VARCHAR(5) NOT NULL,
 	endTime VARCHAR(5),
 	address VARCHAR(75) NOT NULL,
 	venueName VARCHAR(75) NOT NULL,
-	price INT,
+	price INT CHECK(price >= 0),
 	PRIMARY KEY(name, date, startTime),
 	FOREIGN KEY(address, venueName) REFERENCES Venues(address, name)
 );
 
 CREATE TABLE Payments (
-	PID INT PRIMARY KEY,
+	PID INT PRIMARY KEY NOT NULL,
 	venueAddress VARCHAR(75) NOT NULL,
 	venueName VARCHAR(50) NOT NULL,
-	timePaid DATE,
-	amount INT,
+	timePaid DATE NOT NULL,
+	amount INT NOT NULL CHECK(amount >= 0),
 	FOREIGN KEY(venueAddress, venueName) REFERENCES Venues(address, name)
 );
 
 CREATE TABLE Reviews (
-	reviewID INT PRIMARY KEY,
-	emailAddress VARCHAR(50),
-	date DATE,
-	startTime VARCHAR(5),
-	name VARCHAR(50),
+	reviewID INT PRIMARY KEY NOT NULL,
+	emailAddress VARCHAR(50) NOT NULL,
+	date DATE NOT NULL,
+	startTime VARCHAR(5) NOT NULL,
+	name VARCHAR(50) NOT NULL,
 	comments VARCHAR(200),
-	rating INT,
+	rating INT CHECK(rating > 0 AND rating <= 10) NOT NULL,
 	FOREIGN KEY(emailAddress) REFERENCES Users(emailAddress),
 	FOREIGN KEY(date, startTime, name) REFERENCES Activities(date, startTime, name)
 );
 
 CREATE TABLE UserPrefersCategories (
-    emailAddress VARCHAR(50), 
-    categoryName VARCHAR(35), 
+    emailAddress VARCHAR(50) NOT NULL, 
+    categoryName VARCHAR(35) NOT NULL, 
     PRIMARY KEY(emailAddress, categoryName) 
 );
 
 CREATE TABLE Availability (
-	date DATE,
-	startTime VARCHAR(5),
-	endTime VARCHAR(5),
+	date DATE NOT NULL,
+	startTime VARCHAR(5) NOT NULL,
+	endTime VARCHAR(5) NOT NULL,
 	PRIMARY KEY(date, startTime, endTime)
 );
 
 CREATE TABLE VenueAvailability(
-	date DATE,
-	startTime VARCHAR(5),
-	endTime VARCHAR(5),
-	capacity INT,
+	date DATE NOT NULL,
+	startTime VARCHAR(5) NOT NULL,
+	endTime VARCHAR(5) NOT NULL,
+	capacity INT CHECK(capacity >= 0),
 	FOREIGN KEY(date, startTime, endTime) REFERENCES Availability(date, startTime, endTime),
 	PRIMARY KEY(date, startTime, endTime)
 );
 
 CREATE TABLE ActivityCategories (
-	activityName VARCHAR(50),
-	date DATE,
-	startTime CHAR(5),
-	categoryName VARCHAR(35),
+	activityName VARCHAR(50) NOT NULL,
+	date DATE NOT NULL,
+	startTime CHAR(5) NOT NULL,
+	categoryName VARCHAR(35) NOT NULL,
 	PRIMARY KEY(date, startTime, activityName, categoryName),
 	FOREIGN KEY(date, startTime, activityName) REFERENCES Activities(date, startTime, name),
 	FOREIGN KEY(categoryName) REFERENCES Categories
 );
 
 CREATE TABLE DateActivities (
-	participantEmailAddressOne VARCHAR(50),
-	participantEmailAddressTwo VARCHAR(50),
-	startTime CHAR(5),
-	date DATE,
-	activityDate DATE,
-	activityStartTime CHAR(5),
-	activityName VARCHAR(50),
+	participantEmailAddressOne VARCHAR(50) NOT NULL,
+	participantEmailAddressTwo VARCHAR(50) NOT NULL,
+	startTime CHAR(5) NOT NULL,
+	date DATE NOT NULL,
+	activityDate DATE NOT NULL,
+	activityStartTime CHAR(5) NOT NULL,
+	activityName VARCHAR(50) NOT NULL,
 	FOREIGN KEY(participantEmailAddressOne, participantEmailAddressTwo, date, startTime) REFERENCES Dates(userOneEmailAddress, userTwoEmailAddress, date, startTime),
 	FOREIGN KEY(activityDate, activityStartTime, activityName) REFERENCES Activities(date, startTime, name),
 	PRIMARY KEY(participantEmailAddressOne, participantEmailAddressTwo, startTime, date, activityDate, activityStartTime, activityName)
 );
 
 CREATE TABLE UserAvailability (
-	emailAddress VARCHAR(50) REFERENCES Users,
-	date DATE,
-	startTime VARCHAR(5),
-	endTime VARCHAR(5),
+	emailAddress VARCHAR(50) NOT NULL REFERENCES Users,
+	date DATE NOT NULL,
+	startTime VARCHAR(5) NOT NULL,
+	endTime VARCHAR(5) NOT NULL,
 	FOREIGN KEY (date, startTime, endTime) REFERENCES Availability(date, startTime, endTime),
 	PRIMARY KEY(emailAddress, date, startTime, endTime)
 );
 
 CREATE TABLE VenueHasAvailability (
-	address VARCHAR(75),
-	venueName VARCHAR(50),
-	date DATE,
-	startTime CHAR(5),
-	endTime CHAR(5),
+	address VARCHAR(75) NOT NULL,
+	venueName VARCHAR(50) NOT NULL,
+	date DATE NOT NULL,
+	startTime CHAR(5) NOT NULL,
+	endTime CHAR(5) NOT NULL,
 	FOREIGN KEY(address, venueName) REFERENCES Venues(address, name),
 	FOREIGN KEY(date, startTime, endTime) REFERENCES Availability(date, startTime, endTime),
 	PRIMARY KEY(address, venueName, date, startTime, endTime)
@@ -279,55 +279,55 @@ INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('j
 
 INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('Nulla.interdum@auctor.net','2018/03/24', '16:18', '17:10');
 
-INSERT INTO Venues VALUES('Universel Dejeuner Bar and Grill', '2055 Peel St');
-INSERT INTO Venues VALUES ('McDonalds', '625 Saint-Catherine St W');
-INSERT INTO Venues VALUES ('Burger King', '977 Saint-Catherine St W');
-INSERT INTO Venues VALUES ('Biodome', '4777 Pierre-de Coubertin Ave');
-INSERT INTO Venues VALUES ('Upstairs Jazz Bar', '1254 Mackay St');
-INSERT INTO Venues VALUES ('Tokyo Bar', '3709 St Laurent Blvd');
-INSERT INTO Venues VALUES ('Cafe Campus', '57 Rue Prince Arthur E');
-INSERT INTO Venues VALUES ('Parc La Fontaine', '1619 QC-138');
-INSERT INTO Venues VALUES ('Mount Royal', 'Mount Royal');
-INSERT INTO Venues VALUES ('Beaver Lake', 'Beaver Lake');
+INSERT INTO Venues (name, address) VALUES ('Universel Dejeuner Bar and Grill', '2055 Peel St');
+INSERT INTO Venues (name, address) VALUES ('McDonalds', '625 Saint-Catherine St W');
+INSERT INTO Venues (name, address) VALUES ('Burger King', '977 Saint-Catherine St W');
+INSERT INTO Venues (name, address) VALUES ('Biodome', '4777 Pierre-de Coubertin Ave');
+INSERT INTO Venues (name, address) VALUES ('Upstairs Jazz Bar', '1254 Mackay St');
+INSERT INTO Venues (name, address) VALUES ('Tokyo Bar', '3709 St Laurent Blvd');
+INSERT INTO Venues (name, address) VALUES ('Cafe Campus', '57 Rue Prince Arthur E');
+INSERT INTO Venues (name, address) VALUES ('Parc La Fontaine', '1619 QC-138');
+INSERT INTO Venues (name, address) VALUES ('Mount Royal', 'Mount Royal');
+INSERT INTO Venues (name, address) VALUES ('Beaver Lake', 'Beaver Lake');
 
-INSERT INTO Payments VALUES (0, '1254 Mackay St', 'Upstairs Jazz Bar', '2018/03/30', 1500);
-INSERT INTO Payments VALUES (1, '1254 Mackay St', 'Upstairs Jazz Bar', '2018/03/31', 1738);
-INSERT INTO Payments VALUES (2, '3709 St Laurent Blvd', 'Tokyo Bar', '2018/03/29', 1900);
-INSERT INTO Payments VALUES (3, '625 Saint-Catherine St W', 'McDonalds', '2018/04/1', 70);
-INSERT INTO Payments VALUES (4, '2055 Peel St', 'Universel Dejeuner Bar and Grill', '2018/04/15', 1650);
-
-
-INSERT INTO Activities VALUES('Burgers for Lunch', '2018/04/28', '12:30', '13:30', '977 Saint-Catherine St W', 'Burger King', 15);
-INSERT INTO Activities VALUES('Biodome Visit', '2018/04/28', '14:30', '17:30', '4777 Pierre-de Coubertin Ave', 'Biodome', 20);
-
-INSERT INTO Activities VALUES('Dinner and Jazz', '2018/04/16', '19:30', '22:30', '1254 Mackay St', 'Upstairs Jazz Bar', 14);
-
-INSERT INTO Activities VALUES('Skating on Beaver Lake', '2018/04/02', '14:00', '15:30', 'Beaver Lake', 'Beaver Lake', 10);
-INSERT INTO Activities VALUES('Hike to Beaver Lake', '2018/04/02', '13:00', '14:00', 'Mount Royal', 'Mount Royal', 0);
-INSERT INTO Activities VALUES('Burgers for Lunch', '2018/04/02', '12:00', '13:00', '625 Saint-Catherine St W', 'McDonalds', 15);
-
-INSERT INTO Activities VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', '01:00', '57 Rue Prince Arthur E', 'Cafe Campus', 8);
-
-INSERT INTO Activities VALUES('Breakfast Buffet', '2018/04/09', '09:00', '11:00', '2055 Peel St', 'Universel Dejeuner Bar and Grill', 20);
+INSERT INTO Payments (PID, venueAddress, venueName, timePaid, amount) VALUES (0, '1254 Mackay St', 'Upstairs Jazz Bar', '2018/03/30', 1500);
+INSERT INTO Payments (PID, venueAddress, venueName, timePaid, amount) VALUES (1, '1254 Mackay St', 'Upstairs Jazz Bar', '2018/03/31', 1738);
+INSERT INTO Payments (PID, venueAddress, venueName, timePaid, amount) VALUES (2, '3709 St Laurent Blvd', 'Tokyo Bar', '2018/03/29', 1900);
+INSERT INTO Payments (PID, venueAddress, venueName, timePaid, amount) VALUES (3, '625 Saint-Catherine St W', 'McDonalds', '2018/04/1', 70);
+INSERT INTO Payments (PID, venueAddress, venueName, timePaid, amount) VALUES (4, '2055 Peel St', 'Universel Dejeuner Bar and Grill', '2018/04/15', 1650);
 
 
-INSERT INTO Categories VALUES('food');
-INSERT INTO Categories VALUES('club');
-INSERT INTO Categories VALUES('fitness');
-INSERT INTO Categories VALUES('music');
-INSERT INTO Categories VALUES('bar');
-INSERT INTO Categories VALUES('nature');
-INSERT INTO Categories VALUES('theatre');
-INSERT INTO Categories VALUES('movie');
-INSERT INTO Categories VALUES('dance');
-INSERT INTO Categories VALUES('sports');
-INSERT INTO Categories VALUES('cheap');
+INSERT INTO Activities (name, date, startTime, endTime, address, venueName, price) VALUES('Burgers for Lunch', '2018/04/28', '12:30', '13:30', '977 Saint-Catherine St W', 'Burger King', 15);
+INSERT INTO Activities (name, date, startTime, endTime, address, venueName, price) VALUES('Biodome Visit', '2018/04/28', '14:30', '17:30', '4777 Pierre-de Coubertin Ave', 'Biodome', 20);
 
-INSERT INTO Dates VALUES('Donec.egestas@dis.org', 'Curabitur.consequat.lectus@eterosProin.net', '2018/04/28', '12:30','17:30', 35);
-INSERT INTO Dates VALUES('imperdiet@enimSuspendisse.com', 'ac.metus.vitae@enimEtiam.ca', '2018/04/16', '19:30','22:30', 14);
-INSERT INTO Dates VALUES('venenatis.a.magna@Integer.net', 'Donec@velitPellentesque.net', '2018/04/02', '13:00','15:30', 10);
-INSERT INTO Dates VALUES('Aenean.eget@ad.ca', 'imperdiet@enimSuspendisse.com','2018/04/16', '23:00', '01:00', 8);
-INSERT INTO Dates VALUES('tonyhawk50@hotmail.com', 'john.smith@gmail.com', '2018/04/16', '19:30','22:30', 14);
+INSERT INTO Activities (name, date, startTime, endTime, address, venueName, price) VALUES('Dinner and Jazz', '2018/04/16', '19:30', '22:30', '1254 Mackay St', 'Upstairs Jazz Bar', 14);
+
+INSERT INTO Activities (name, date, startTime, endTime, address, venueName, price) VALUES('Skating on Beaver Lake', '2018/04/02', '14:00', '15:30', 'Beaver Lake', 'Beaver Lake', 10);
+INSERT INTO Activities (name, date, startTime, endTime, address, venueName, price) VALUES('Hike to Beaver Lake', '2018/04/02', '13:00', '14:00', 'Mount Royal', 'Mount Royal', 0);
+INSERT INTO Activities (name, date, startTime, endTime, address, venueName, price) VALUES('Burgers for Lunch', '2018/04/02', '12:00', '13:00', '625 Saint-Catherine St W', 'McDonalds', 15);
+
+INSERT INTO Activities (name, date, startTime, endTime, address, venueName, price) VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', '01:00', '57 Rue Prince Arthur E', 'Cafe Campus', 8);
+
+INSERT INTO Activities (name, date, startTime, endTime, address, venueName, price) VALUES('Breakfast Buffet', '2018/04/09', '09:00', '11:00', '2055 Peel St', 'Universel Dejeuner Bar and Grill', 20);
+
+
+INSERT INTO Categories (categoryName) VALUES('food');
+INSERT INTO Categories (categoryName) VALUES('club');
+INSERT INTO Categories (categoryName) VALUES('fitness');
+INSERT INTO Categories (categoryName) VALUES('music');
+INSERT INTO Categories (categoryName) VALUES('bar');
+INSERT INTO Categories (categoryName) VALUES('nature');
+INSERT INTO Categories (categoryName) VALUES('theatre');
+INSERT INTO Categories (categoryName) VALUES('movie');
+INSERT INTO Categories (categoryName) VALUES('dance');
+INSERT INTO Categories (categoryName) VALUES('sports');
+INSERT INTO Categories (categoryName) VALUES('cheap');
+
+INSERT INTO Dates (userOneEmailAddress, userTwoEmailAddress, date, startTime, endTime, netPrice) VALUES('Donec.egestas@dis.org', 'Curabitur.consequat.lectus@eterosProin.net', '2018/04/28', '12:30','17:30', 35);
+INSERT INTO Dates (userOneEmailAddress, userTwoEmailAddress, date, startTime, endTime, netPrice) VALUES('imperdiet@enimSuspendisse.com', 'ac.metus.vitae@enimEtiam.ca', '2018/04/16', '19:30','22:30', 14);
+INSERT INTO Dates (userOneEmailAddress, userTwoEmailAddress, date, startTime, endTime, netPrice) VALUES('venenatis.a.magna@Integer.net', 'Donec@velitPellentesque.net', '2018/04/02', '13:00','15:30', 10);
+INSERT INTO Dates (userOneEmailAddress, userTwoEmailAddress, date, startTime, endTime, netPrice) VALUES('Aenean.eget@ad.ca', 'imperdiet@enimSuspendisse.com','2018/04/16', '23:00', '01:00', 8);
+INSERT INTO Dates (userOneEmailAddress, userTwoEmailAddress, date, startTime, endTime, netPrice) VALUES('tonyhawk50@hotmail.com', 'john.smith@gmail.com', '2018/04/16', '19:30','22:30', 14);
 
 INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressTwo, date, startTime, activityName, activityDate, activityStartTime) VALUES('Donec.egestas@dis.org', 'Curabitur.consequat.lectus@eterosProin.net', '2018/04/28', '12:30', 'Burgers for Lunch', '2018/04/28', '12:30');
 INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressTwo, date, startTime, activityName, activityDate, activityStartTime) VALUES('Donec.egestas@dis.org', 'Curabitur.consequat.lectus@eterosProin.net', '2018/04/28', '12:30', 'Biodome Visit', '2018/04/28', '14:30');
@@ -338,48 +338,48 @@ INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressT
 INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressTwo, date, startTime, activityName, activityDate, activityStartTime) VALUES('Aenean.eget@ad.ca', 'imperdiet@enimSuspendisse.com','2018/04/16', '23:00', 'Clubbing at Cafe Campus', '2018/04/16', '23:00');
 INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressTwo, date, startTime, activityName, activityDate, activityStartTime) VALUES('tonyhawk50@hotmail.com', 'john.smith@gmail.com', '2018/04/16', '19:30', 'Dinner and Jazz', '2018/04/16', '19:30');
 
-INSERT INTO ActivityCategories VALUES('Burgers for Lunch', '2018/04/28', '12:30', 'food');
-INSERT INTO ActivityCategories VALUES('Burgers for Lunch', '2018/04/28', '12:30', 'cheap');
-INSERT INTO ActivityCategories VALUES('Biodome Visit', '2018/04/28', '14:30', 'nature');
-INSERT INTO ActivityCategories VALUES('Dinner and Jazz', '2018/04/16', '19:30', 'food');
-INSERT INTO ActivityCategories VALUES('Dinner and Jazz', '2018/04/16', '19:30', 'music');
-INSERT INTO ActivityCategories VALUES('Dinner and Jazz', '2018/04/16', '19:30', 'bar');
-INSERT INTO ActivityCategories VALUES('Skating on Beaver Lake', '2018/04/02', '14:00', 'fitness');
-INSERT INTO ActivityCategories VALUES('Skating on Beaver Lake', '2018/04/02', '14:00', 'nature');
-INSERT INTO ActivityCategories VALUES('Hike to Beaver Lake', '2018/04/02', '13:00', 'fitness');
-INSERT INTO ActivityCategories VALUES('Hike to Beaver Lake', '2018/04/02', '13:00', 'nature');
-INSERT INTO ActivityCategories VALUES('Hike to Beaver Lake', '2018/04/02', '13:00', 'cheap');
-INSERT INTO ActivityCategories VALUES('Burgers for Lunch', '2018/04/02', '12:00', 'food');
-INSERT INTO ActivityCategories VALUES('Burgers for Lunch', '2018/04/02', '12:00', 'cheap');
-INSERT INTO ActivityCategories VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', 'club');
-INSERT INTO ActivityCategories VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', 'music');
-INSERT INTO ActivityCategories VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', 'bar');
-INSERT INTO ActivityCategories VALUES('Breakfast Buffet', '2018/04/09', '09:00', 'food');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Burgers for Lunch', '2018/04/28', '12:30', 'food');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Burgers for Lunch', '2018/04/28', '12:30', 'cheap');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Biodome Visit', '2018/04/28', '14:30', 'nature');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Dinner and Jazz', '2018/04/16', '19:30', 'food');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Dinner and Jazz', '2018/04/16', '19:30', 'music');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Dinner and Jazz', '2018/04/16', '19:30', 'bar');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Skating on Beaver Lake', '2018/04/02', '14:00', 'fitness');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Skating on Beaver Lake', '2018/04/02', '14:00', 'nature');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Hike to Beaver Lake', '2018/04/02', '13:00', 'fitness');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Hike to Beaver Lake', '2018/04/02', '13:00', 'nature');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Hike to Beaver Lake', '2018/04/02', '13:00', 'cheap');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Burgers for Lunch', '2018/04/02', '12:00', 'food');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Burgers for Lunch', '2018/04/02', '12:00', 'cheap');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', 'club');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', 'music');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', 'bar');
+INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Breakfast Buffet', '2018/04/09', '09:00', 'food');
 
-INSERT INTO Reviews VALUES('82738', 'tonyhawk50@hotmail.com', '2018/04/16', '19:30', 'Dinner and Jazz', 'Great atmosphere and fantastic music. Food and drinks were pretty pricy, though.', 8);
-INSERT INTO Reviews VALUES('82790', 'imperdiet@enimSuspendisse.com','2018/04/16', '19:30', 'Dinner and Jazz', 'Music was boring and sub-par. Food and drinks were excellent, well worth the price.', 4);
-INSERT INTO Reviews VALUES('79688', 'Nulla.interdum@auctor.net','2018/04/09', '09:00', 'Breakfast Buffet', 'tasty foodz', 10);
-INSERT INTO Reviews VALUES('78402', 'venenatis.a.magna@Integer.net','2018/04/02', '13:00', 'Hike to Beaver Lake', 'Perfect weather, pefect length!', 9);
-INSERT INTO Reviews VALUES('85721', 'Curabitur.consequat.lectus@eterosProin.net','2018/04/28', '14:30', 'Biodome Visit', 'Those animals sure were animal-y! And the plants were exceedingly plant-y', 5);
-INSERT INTO Reviews VALUES('78503', 'tonyhawk50@hotmail.com', '2018/04/02', '13:00', 'Hike to Beaver Lake', 'Nothing compared to a good X-games.', 1);
+INSERT INTO Reviews (reviewID, emailAddress, date, startTime, name, comments, rating) VALUES('82738', 'tonyhawk50@hotmail.com', '2018/04/16', '19:30', 'Dinner and Jazz', 'Great atmosphere and fantastic music. Food and drinks were pretty pricy, though.', 8);
+INSERT INTO Reviews (reviewID, emailAddress, date, startTime, name, comments, rating) VALUES('82790', 'imperdiet@enimSuspendisse.com','2018/04/16', '19:30', 'Dinner and Jazz', 'Music was boring and sub-par. Food and drinks were excellent, well worth the price.', 4);
+INSERT INTO Reviews (reviewID, emailAddress, date, startTime, name, comments, rating) VALUES('79688', 'Nulla.interdum@auctor.net','2018/04/09', '09:00', 'Breakfast Buffet', 'tasty foodz', 10);
+INSERT INTO Reviews (reviewID, emailAddress, date, startTime, name, comments, rating) VALUES('78402', 'venenatis.a.magna@Integer.net','2018/04/02', '13:00', 'Hike to Beaver Lake', 'Perfect weather, pefect length!', 9);
+INSERT INTO Reviews (reviewID, emailAddress, date, startTime, name, comments, rating) VALUES('85721', 'Curabitur.consequat.lectus@eterosProin.net','2018/04/28', '14:30', 'Biodome Visit', 'Those animals sure were animal-y! And the plants were exceedingly plant-y', 5);
+INSERT INTO Reviews (reviewID, emailAddress, date, startTime, name, comments, rating) VALUES('78503', 'tonyhawk50@hotmail.com', '2018/04/02', '13:00', 'Hike to Beaver Lake', 'Nothing compared to a good X-games.', 1);
 
-INSERT INTO VenueAvailability VALUES('2018/04/28', '10:00', '23:00', 60);
-INSERT INTO VenueAvailability VALUES('2018/04/28', '10:00', '18:00', 200);
-INSERT INTO VenueAvailability VALUES('2018/04/16', '12:30', '02:00', 50);
-INSERT INTO VenueAvailability VALUES('2018/04/02', '09:00', '21:00', 0);
-INSERT INTO VenueAvailability VALUES('2018/04/02', '00:00', '23:59', 0);
-INSERT INTO VenueAvailability VALUES('2018/04/02', '10:00', '23:00', 60);
-INSERT INTO VenueAvailability VALUES('2018/04/16', '19:00', '04:00', 300);
-INSERT INTO VenueAvailability VALUES('2018/04/09', '07:00', '11:00', 100);
+INSERT INTO VenueAvailability (date, startTime, endTime, capacity) VALUES('2018/04/28', '10:00', '23:00', 60);
+INSERT INTO VenueAvailability (date, startTime, endTime, capacity) VALUES('2018/04/28', '10:00', '18:00', 200);
+INSERT INTO VenueAvailability (date, startTime, endTime, capacity) VALUES('2018/04/16', '12:30', '02:00', 50);
+INSERT INTO VenueAvailability (date, startTime, endTime, capacity) VALUES('2018/04/02', '09:00', '21:00', 0);
+INSERT INTO VenueAvailability (date, startTime, endTime, capacity) VALUES('2018/04/02', '00:00', '23:59', 0);
+INSERT INTO VenueAvailability (date, startTime, endTime, capacity) VALUES('2018/04/02', '10:00', '23:00', 60);
+INSERT INTO VenueAvailability (date, startTime, endTime, capacity) VALUES('2018/04/16', '19:00', '04:00', 300);
+INSERT INTO VenueAvailability (date, startTime, endTime, capacity) VALUES('2018/04/09', '07:00', '11:00', 100);
 
-INSERT INTO VenueHasAvailability VALUES('977 Saint-Catherine St W', 'Burger King', '2018/04/28', '10:00', '23:00');
-INSERT INTO VenueHasAvailability VALUES('4777 Pierre-de Coubertin Ave', 'Biodome', '2018/04/28', '10:00', '18:00');
-INSERT INTO VenueHasAvailability VALUES('1254 Mackay St', 'Upstairs Jazz Bar', '2018/04/16', '12:30', '02:00');
-INSERT INTO VenueHasAvailability VALUES('Beaver Lake', 'Beaver Lake', '2018/04/02', '09:00', '21:00');
-INSERT INTO VenueHasAvailability VALUES('Mount Royal', 'Mount Royal', '2018/04/02', '00:00', '23:59');
-INSERT INTO VenueHasAvailability VALUES('625 Saint-Catherine St W', 'McDonalds', '2018/04/02', '10:00', '23:00');
-INSERT INTO VenueHasAvailability VALUES('57 Rue Prince Arthur E', 'Cafe Campus', '2018/04/16', '19:00', '04:00');
-INSERT INTO VenueHasAvailability VALUES('2055 Peel St', 'Universel Dejeuner Bar and Grill', '2018/04/09', '07:00', '11:00');
+INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('977 Saint-Catherine St W', 'Burger King', '2018/04/28', '10:00', '23:00');
+INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('4777 Pierre-de Coubertin Ave', 'Biodome', '2018/04/28', '10:00', '18:00');
+INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('1254 Mackay St', 'Upstairs Jazz Bar', '2018/04/16', '12:30', '02:00');
+INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('Beaver Lake', 'Beaver Lake', '2018/04/02', '09:00', '21:00');
+INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('Mount Royal', 'Mount Royal', '2018/04/02', '00:00', '23:59');
+INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('625 Saint-Catherine St W', 'McDonalds', '2018/04/02', '10:00', '23:00');
+INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('57 Rue Prince Arthur E', 'Cafe Campus', '2018/04/16', '19:00', '04:00');
+INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('2055 Peel St', 'Universel Dejeuner Bar and Grill', '2018/04/09', '07:00', '11:00');
 
 
 
