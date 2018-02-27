@@ -54,6 +54,18 @@ CREATE TABLE Payments (
 	FOREIGN KEY(venueAddress, venueName) REFERENCES Venues(address, name)
 );
 
+CREATE TABLE Reviews (
+	reviewID INT PRIMARY KEY,
+	emailAddress VARCHAR(50),
+	date DATE,
+	startTime VARCHAR(5),
+	name VARCHAR(50),
+	comments VARCHAR(200),
+	rating INT,
+	FOREIGN KEY(emailAddress) REFERENCES Users(emailAddress),
+	FOREIGN KEY(date, startTime, name) REFERENCES Activites(date, startTime, name)
+)
+
 CREATE TABLE UserPrefersCategories (
     emailAddress VARCHAR(50), 
     categoryName VARCHAR(35), 
@@ -77,9 +89,9 @@ CREATE TABLE VenueAvailability(
 );
 
 CREATE TABLE ActivityCategories (
+	activityName VARCHAR(50),
 	date DATE,
 	startTime CHAR(5),
-	activityName VARCHAR(50),
 	categoryName VARCHAR(35),
 	PRIMARY KEY(date, startTime, activityName, categoryName),
 	FOREIGN KEY(date, startTime, activityName) REFERENCES Activities(date, startTime, name),
@@ -119,6 +131,18 @@ CREATE TABLE VenueHasAvailability (
 	PRIMARY KEY(address, venueName, date, startTime, endTime)
 );
 
+INSERT INTO Users VALUES('john.smith@gmail.com', 25, 250, '5145551234', 'Smith', 'John', 'Male', 'Male');
+INSERT INTO users VALUES('anne.poppins@gmail.com', 23, 800, '5142970770', 'Poppins', 'Anne', 'Female', 'Male');
+INSERT INTO users VALUES('tonyhawk50@hotmail.com', 34, 1200, '5148839942', 'Hawk', 'Tony', 'Male', 'Female');
+INSERT INTO users VALUES('elaineWilliams@yahoo.com', 29, 150, '5148276543', 'Williams', 'Elaine', 'Female', 'Female');
+INSERT INTO users VALUES(‘miriam_farry@yahoo.com', 19, 300, '5146706709', ’Farry’, Miriam, 'Female', ‘Male’);
+INSERT INTO users VALUES('mobyDick32@gmail.com', 75, 75, '5140001295', 'Dick', 'Moby', 'Male', 'Male');
+INSERT INTO users VALUES(‘ madison_hof@ygmail.com’, 22, 100, ‘5146619516’, ‘Hof’,  ‘Madison’, ‘Male’, ‘Female’);
+INSERT INTO users VALUES(‘christianEspo99@gmail.com’, 39, 1500, ‘5149986677’, ‘Espos’, ‘Christian’, ’ Other’, ‘ Female’)
+INSERT INTO users VALUES( ‘emilySeinfeld123@gmail.com’,42 ,1500 , ‘5141552436’, ‘Seinfeld’, ‘Emily’, ‘Female’, ‘Both’)
+INSERT INTO users VALUES( ‘mobyDick32@gmail.com’,75, 75, ‘5140001295’, ‘Dick’, ‘Moby’, ‘Male’, ‘Male’)
+
+
 INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,genderPreference,age) VALUES ('Morgan','Jane','Donec.egestas@dis.org',1140,'1-514-108-5682','Female','Female',25),('Morse','Alfreda','semper@eratvolutpatNulla.ca',1676,'1-514-340-3867','Female','Female',46),('Baldwin','Stacy','pharetra.felis@semelit.edu',2272,'1-514-527-4385','Male','Female',46),('Prince','Abbot','orci.lacus.vestibulum@tristique.ca',1925,'1-514-113-8877','Female','Male',18),('Richards','Leigh','dolor.vitae@aliquet.com',727,'1-514-955-0619','Other','Male',47),('Tran','Stuart','libero.et.tristique@Nulla.edu',4337,'1-514-100-1823','Other','Female',36),('Burch','Ayanna','nonummy@ametrisusDonec.edu',2279,'1-514-731-9139','Male','Male',66),('Dickerson','Morgan','Fusce.mi@vitaesodalesat.org',3946,'1-514-644-0754','Other','Female',37),('Farmer','Danielle','Proin.vel.nisl@Quisque.co.uk',590,'1-514-512-6921','Male','None',74),('Knight','Aspen','fermentum.metus@vitaeposuereat.org',3755,'1-514-806-1635','Other','Male',49);
 INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,genderPreference,age) VALUES ('Barker','Otto','sed.est@Nullam.edu',2355,'1-514-480-8326','Female','Female',51),('Beach','Denton','Nulla.interdum@auctor.net',2083,'1-514-703-8265','Other','Female',61),('Powell','Troy','quam.vel@adipiscing.org',919,'1-514-209-0037','Male','None',41),('Rivers','Clarke','in@purusgravidasagittis.edu',1096,'1-514-245-0990','Female','Female',58),('Joseph','Nathan','semper.rutrum@purus.org',4187,'1-514-825-1875','Male','Female',72),('Potter','Gray','Maecenas.mi@mitempor.ca',3956,'1-514-480-0158','Other','Female',60),('Goodman','Joelle','eu.placerat.eget@duiaugueeu.org',4243,'1-514-455-8896','Other','None',74),('Castillo','Cade','Nunc@sitametconsectetuer.co.uk',2865,'1-514-968-0101','Male','None',55),('Le','Wyatt','nec.imperdiet@magnamalesuada.net',2437,'1-514-302-0088','Female','None',26),('Douglas','Keane','arcu.eu@blandit.org',294,'1-514-806-6786','Other','Male',69);
 INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,genderPreference,age) VALUES ('Stewart','Nathaniel','Aenean.eget@ad.ca',4663,'1-514-650-5627','Female','Male',56),('Herrera','Macey','at@in.net',4198,'1-514-246-5290','Other','Female',75),('Morales','Noelani','mi.eleifend.egestas@adipiscingelitAliquam.org',3827,'1-514-477-5632','Male','None',67),('Roy','Amal','nec@Maecenaslibero.net',3822,'1-514-398-2137','Female','Male',35),('Jacobson','Andrew','dignissim.lacus@viverra.net',1125,'1-514-995-5020','Male','Female',70),('Lewis','Olympia','non@Mauris.com',578,'1-514-858-9207','Female','Female',50),('Stephenson','Tyler','massa.Quisque@nullaIntegervulputate.net',3503,'1-514-445-6017','Other','Female',46),('Cherry','Damon','purus@urnajusto.ca',4811,'1-514-217-0208','Male','Male',47),('Burks','Ray','Donec@tempor.edu',937,'1-514-577-8656','Male','Male',74),('Cook','Driscoll','dignissim.tempor.arcu@magnaaneque.com',2075,'1-514-811-4658','Female','None',66);
@@ -127,11 +151,11 @@ INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,gen
 INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,genderPreference,age) VALUES ('Copeland','Kane','penatibus.et@egestas.edu',3974,'1-514-931-5604','Female','Female',55),('Russell','Blythe','Donec@velitPellentesque.net',841,'1-514-158-2605','Female','None',35),('Michael','Dale','Proin.ultrices.Duis@duiCumsociis.edu',379,'1-514-716-4579','Female','Female',21),('Marks','Jeremy','vitae.orci@maurisblandit.edu',361,'1-514-297-3901','Male','None',56),('Hanson','Seth','imperdiet@Duiselementum.net',3726,'1-514-173-0030','Female','Female',43),('Spencer','Brent','eu.dui.Cum@fringilla.com',1278,'1-514-254-9780','Male','Male',22),('Clarke','Giselle','sit.amet@pretiumet.edu',226,'1-514-924-1245','Female','Male',65),('Fitzgerald','Destiny','ultrices@nisidictumaugue.com',699,'1-514-623-9408','Female','Female',45),('Lee','Teagan','in.sodales@consequat.co.uk',3243,'1-514-749-0469','Male','None',67),('Stark','Thaddeus','pharetra.felis.eget@nequevitae.ca',3000,'1-514-470-8865','Male','Female',33);
 INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,genderPreference,age) VALUES ('Walsh','Shellie','tristique.pellentesque@placerat.co.uk',635,'1-514-961-7723','Male','None',18),('Randall','Reese','venenatis.a.magna@Integer.net',1238,'1-514-128-6889','Other','Male',36),('Watts','Quintessa','accumsan@arcu.edu',2440,'1-514-211-7001','Other','Female',55),('Doyle','Lionel','eleifend.non@urna.org',2630,'1-514-889-3094','Female','Female',39),('Cooper','Francis','nec.luctus.felis@Crasvulputatevelit.net',4164,'1-514-772-0247','Male','None',50),('Howell','Jared','volutpat.Nulla@pharetrafeliseget.net',234,'1-514-498-0068','Male','Female',73),('Dejesus','Rudyard','ligula@sem.com',2404,'1-514-448-2439','Other','None',24),('Schneider','Dominic','dictum.placerat.augue@eratnonummy.co.uk',4191,'1-514-283-8435','Female','None',34),('Strong','Nyssa','eros@Sed.net',4687,'1-514-657-5246','Female','Male',44),('Hill','Joseph','Aliquam@faucibuslectusa.net',1724,'1-514-241-9465','Other','None',61);
 INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,genderPreference,age) VALUES ('Clayton','Melinda','convallis.in@blanditNamnulla.edu',4530,'1-514-781-1323','Male','None',41),('Mayer','Felix','imperdiet@enimSuspendisse.com',4459,'1-514-226-9045','Other','Female',54),('Mccormick','Faith','purus.ac@nullaIntincidunt.net',1944,'1-514-397-6433','Female','Male',25),('Parks','Judith','turpis.In.condimentum@loremeget.ca',4537,'1-514-341-9432','Male','Female',19),('Robertson','Blake','tristique@Aliquamrutrum.com',2406,'1-514-724-8997','Female','Female',43),('Mcdowell','Linus','ullamcorper@Mauris.net',2706,'1-514-368-4989','Male','Male',67),('Rodriguez','Stephanie','consectetuer.cursus@feugiat.edu',3863,'1-514-212-7223','Female','Male',18),('Rodriguez','Len','nunc@augueeutempor.com',4085,'1-514-269-7016','Other','Male',63),('Solis','Geoffrey','ligula@vitaeeratVivamus.com',2369,'1-514-102-0364','Male','None',42),('Ortiz','Colton','Cras.vulputate.velit@liberoatauctor.net',1483,'1-514-389-6992','Female','None',48);
-INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,genderPreference,age) VALUES ('Meadows','Dylan','Curabitur.consequat.lectus@eterosProin.net',2302,'1-514-172-1149','Male','None',73),('Carter','Cheyenne','vulputate.lacus.Cras@ametfaucibus.ca',1505,'1-514-330-6849','Other','Male',57),('Castaneda','Kibo','non.hendrerit@lobortistellusjusto.edu',2413,'1-514-324-5698','Male','None',31),('Cleveland','Sopoline','volutpat.ornare@ut.ca',1642,'1-514-680-2525','Male','Female',28),('Acosta','Anika','id.nunc.interdum@massanon.com',1079,'1-514-492-6286','Female','Female',18),('Harmon','Beau','Duis.volutpat.nunc@diamPellentesquehabitant.com',1323,'1-514-285-6503','Female','None',69),('Gill','Piper','euismod.in.dolor@eunullaat.edu',379,'1-514-911-4713','Male','Male',32),('Callahan','Eliana','odio@Nuncut.net',4894,'1-514-803-2945','Male','Male',55),('Lowery','Owen','eu@interdumenim.com',3300,'1-514-364-0211','Male','Female',60),('Britt','Shaeleigh','porttitor.eros.nec@tellussem.co.uk',3262,'1-514-911-8111','Male','Female',19);
+INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,genderPreference,age) VALUES ('Meadows','Dayna','Curabitur.consequat.lectus@eterosProin.net',2302,'1-514-172-1149','Female','None',73),('Carter','Cheyenne','vulputate.lacus.Cras@ametfaucibus.ca',1505,'1-514-330-6849','Other','Male',57),('Castaneda','Kibo','non.hendrerit@lobortistellusjusto.edu',2413,'1-514-324-5698','Male','None',31),('Cleveland','Sopoline','volutpat.ornare@ut.ca',1642,'1-514-680-2525','Male','Female',28),('Acosta','Anika','id.nunc.interdum@massanon.com',1079,'1-514-492-6286','Female','Female',18),('Harmon','Beau','Duis.volutpat.nunc@diamPellentesquehabitant.com',1323,'1-514-285-6503','Female','None',69),('Gill','Piper','euismod.in.dolor@eunullaat.edu',379,'1-514-911-4713','Male','Male',32),('Callahan','Eliana','odio@Nuncut.net',4894,'1-514-803-2945','Male','Male',55),('Lowery','Owen','eu@interdumenim.com',3300,'1-514-364-0211','Male','Female',60),('Britt','Shaeleigh','porttitor.eros.nec@tellussem.co.uk',3262,'1-514-911-8111','Male','Female',19);
 INSERT INTO Users (lastName,firstName,emailAddress,budget,phoneNumber,gender,genderPreference,age) VALUES ('Chan','Jolie','ac.metus.vitae@enimEtiam.ca',3176,'1-514-771-9000','Other','Female',53),('Chang','Nicholas','risus.Duis.a@aaliquet.ca',3814,'1-514-266-0115','Male','None',44),('Lamb','Alan','ipsum.Phasellus.vitae@gravidamauris.net',3833,'1-514-828-9451','Other','None',67),('Rosa','Hoyt','dui.semper@mattis.co.uk',4990,'1-514-817-6907','Male','Male',35),('Mccullough','Maryam','lacinia.vitae.sodales@tristiquepellentesque.co.uk',519,'1-514-749-9954','Male','Male',51),('Quinn','Cole','Quisque.libero@tristiquepharetra.edu',2655,'1-514-611-3730','Male','Female',65),('Atkins','Maxwell','eu@turpisIncondimentum.edu',1808,'1-514-478-0237','Male','Female',65),('Skinner','Carissa','dictum.Proin@risusQuisquelibero.com',984,'1-514-782-3743','Male','None',37),('Meyer','Grace','imperdiet.non@commodohendrerit.co.uk',4264,'1-514-904-9730','Male','None',46),('Horne','Ralph','posuere.cubilia.Curae@tincidunt.ca',2580,'1-514-774-2232','Male','None',26);
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/02/28', '12:37', '19:21');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/15', '15:39', '20:41');
-INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/02', '13:50', '18:10');
+INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/02', '11:32', '17:23');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/02/28', '15:35', '18:31');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/04', '16:49', '21:53');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/04', '12:30', '18:44');
@@ -161,7 +185,7 @@ INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/28', '13:08
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/02', '13:43', '21:39');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/26', '16:51', '19:43');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/14', '15:25', '19:45');
-INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/31', '15:01', '17:45');
+INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/16', '18:39', '23:23');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/22', '13:05', '20:48');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/02/26', '15:52', '18:17');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/30', '16:24', '22:37');
@@ -175,7 +199,7 @@ INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/04', '15:24
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/02/27', '12:20', '21:13');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/27', '15:42', '21:58');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/03', '12:18', '22:42');
-INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/15', '12:34', '17:13');
+INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/16', '19:00', '22:30');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/30', '15:58', '20:10');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/02/25', '13:36', '19:51');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/15', '15:44', '17:17');
@@ -194,7 +218,7 @@ INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/18', '14:45
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/06', '15:10', '20:45');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/14', '12:27', '21:31');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/06', '15:39', '21:41');
-INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/22', '14:41', '22:29');
+INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/16', '21:12', '02:00');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/28', '14:19', '20:20');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/04', '13:35', '21:27');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/02/25', '14:36', '19:43');
@@ -205,7 +229,7 @@ INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/19', '15:29
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/01', '13:09', '20:00');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/30', '12:52', '21:26');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/17', '12:55', '20:14');
-INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/16', '13:24', '22:21');
+INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/16', '15:21', '22:43');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/13', '14:29', '18:02');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/12', '16:31', '22:12');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/27', '15:35', '17:29');
@@ -214,34 +238,37 @@ INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/14', '13:47
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/02/28', '12:38', '22:04');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/07', '15:45', '22:42');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/01', '13:59', '20:24');
-INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/15', '15:05', '22:03');
+INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/28', '10:35', '18:01');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/02/23', '15:15', '22:29');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/21', '13:23', '22:59');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/02/27', '14:00', '18:15');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/18', '13:04', '21:57');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/22', '13:45', '18:50');
-INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/25', '15:25', '22:53');
+INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/28', '12:18', '17:51');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/30', '13:15', '20:34');
-INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/07', '12:45', '19:00');
+INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/16', '20:52', '01:12');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/17', '15:24', '17:17');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/14', '16:21', '19:05');
-INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/11', '14:26', '17:08');
+INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/02', '11:17', '16:00');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/04', '16:00', '21:50');
 INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/04/20', '13:21', '18:35');
-INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/24', '16:18', '19:20');
+INSERT INTO Availability (date, startTime, endTime) VALUES ('2018/03/24', '16:18', '17:10');
 
 INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('Donec.egestas@dis.org','2018/04/28','12:18', '17:51' );
 INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('Donec.egestas@dis.org','2018/04/02', '15:35', '18:27');
 INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('Curabitur.consequat.lectus@eterosProin.net','2018/04/28', '10:35', '18:01');
 
-INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('imperdiet@enimSuspendisse.com','2018/04/16', '15:21' '22:43');
-INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('ac.metus.vitae@enimEtiam.ca,'2018/04/16', '18:39', '23:23' );
+INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('imperdiet@enimSuspendisse.com','2018/04/16', '15:21', '22:43');
+INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('ac.metus.vitae@enimEtiam.ca','2018/04/16', '18:39', '23:23' );
 
-INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('venenatis.a.magna@Integer.net,'2018/04/02', '11:17', '16:00' );
+INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('venenatis.a.magna@Integer.net','2018/04/02', '11:17', '16:00' );
 INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('Donec@velitPellentesque.net','2018/04/02', '11:32', '17:23');
 
 INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('Aenean.eget@ad.ca','2018/04/16', '20:52', '01:12' );
 INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('imperdiet@enimSuspendisse.com','2018/04/16', '21:12', '02:00');
+
+INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('tonyhawk50@hotmail.com','2018/04/16', '19:00', '22:30' );
+INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('john.smith@gmail.com','2018/04/16', '18:39', '23:23');
 
 INSERT INTO UserAvailability (emailAddress, date, startTime, endTime) VALUES ('Nulla.interdum@auctor.net','2018/03/24', '16:18', '17:10');
 
@@ -264,28 +291,98 @@ INSERT INTO Payments VALUES (4, '2055 Peel St', 'Universel Dejeuner Bar and Gril
 
 
 INSERT INTO Activities VALUES('Burgers for Lunch', '2018/04/28', '12:30', '13:30', '977 Saint-Catherine St W', 'Burger King', 15);
-INSERT INTO Activities VALUES('Biodome Walk', '2018/04/28', '14:30', '17:30', '4777 Pierre-de Coubertin Ave', 'Biodome', 20);
+INSERT INTO Activities VALUES('Biodome Visit', '2018/04/28', '14:30', '17:30', '4777 Pierre-de Coubertin Ave', 'Biodome', 20);
 
 INSERT INTO Activities VALUES('Dinner and Jazz', '2018/04/16', '19:30', '22:30', '1254 Mackay St', 'Upstairs Jazz Bar', 14);
 
-INSERT INTO Activities VALUES('Skating on Beaver Lake', '2018/04/02', '14:00', '15:30', 'Beaver Lake', 'Beaver Lake', 0);
+INSERT INTO Activities VALUES('Skating on Beaver Lake', '2018/04/02', '14:00', '15:30', 'Beaver Lake', 'Beaver Lake', 10);
 INSERT INTO Activities VALUES('Hike to Beaver Lake', '2018/04/02', '13:00', '14:00', 'Mount Royal', 'Mount Royal', 0);
-INSERT INTO Activities VALUES('Burgers for Lunch', '2018/04/02', '12:00', '13:00', '625 Saint-Catherine St W', 'McDonalds', 0);
+INSERT INTO Activities VALUES('Burgers for Lunch', '2018/04/02', '12:00', '13:00', '625 Saint-Catherine St W', 'McDonalds', 15);
 
 INSERT INTO Activities VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', '01:00', '57 Rue Prince Arthur E', 'Cafe Campus', 8);
 
 INSERT INTO Activities VALUES('Breakfast Buffet', '2018/04/09', '09:00', '11:00', '2055 Peel St', 'Universel Dejeuner Bar and Grill', 20);
 
 
-INSERT INTO Categories VALUES('food')
-INSERT INTO Categories VALUES('club')
-INSERT INTO Categories VALUES('fitness')
-INSERT INTO Categories VALUES('music')
-INSERT INTO Categories VALUES('bar')
-INSERT INTO Categories VALUES('nature')
-INSERT INTO Categories VALUES('theatre')
-INSERT INTO Categories VALUES('movie')
-INSERT INTO Categories VALUES('dance')
-INSERT INTO Categories VALUES('sports')
+INSERT INTO Categories VALUES('food');
+INSERT INTO Categories VALUES('club');
+INSERT INTO Categories VALUES('fitness');
+INSERT INTO Categories VALUES('music');
+INSERT INTO Categories VALUES('bar');
+INSERT INTO Categories VALUES('nature');
+INSERT INTO Categories VALUES('theatre');
+INSERT INTO Categories VALUES('movie');
+INSERT INTO Categories VALUES('dance');
+INSERT INTO Categories VALUES('sports');
+INSERT INTO Categories VALUES('cheap');
+
+INSERT INTO Dates VALUES('Donec.egestas@dis.org', 'Curabitur.consequat.lectus@eterosProin.net', '2018/04/28', '12:30','17:30', 35);
+INSERT INTO Dates VALUES('imperdiet@enimSuspendisse.com', 'ac.metus.vitae@enimEtiam.ca', '2018/04/16', '19:30','22:30', 14);
+INSERT INTO Dates VALUES('venenatis.a.magna@Integer.net', 'Donec@velitPellentesque.net', '2018/04/02', '13:00','15:30', 10);
+INSERT INTO Dates VALUES('Aenean.eget@ad.ca', 'imperdiet@enimSuspendisse.com','2018/04/16', '23:00', '01:00', 8);
+INSERT INTO Dates VALUES('tonyhawk50@hotmail.com', 'john.smith@gmail.com', '2018/04/16', '19:30','22:30', 14);
+
+INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressTwo, date, startTime, , activityName, activityDate, activityStartTime) VALUES('Donec.egestas@dis.org', 'Curabitur.consequat.lectus@eterosProin.net', '2018/04/28', '12:30', 'Burgers for Lunch', '2018/04/28', '12:30');
+INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressTwo, date, startTime, , activityName, activityDate, activityStartTime) VALUES('Donec.egestas@dis.org', 'Curabitur.consequat.lectus@eterosProin.net', '2018/04/28', '12:30', 'Biodome Visit', '2018/04/28', '14:30');
+INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressTwo, date, startTime, , activityName, activityDate, activityStartTime) VALUES('imperdiet@enimSuspendisse.com', 'ac.metus.vitae@enimEtiam.ca', '2018/04/16', '19:30', 'Dinner and Jazz', '2018/04/16', '19:30');
+INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressTwo, date, startTime, , activityName, activityDate, activityStartTime) VALUES('venenatis.a.magna@Integer.net', 'Donec@velitPellentesque.net', '2018/04/02', '13:00', 'Skating on Beaver Lake', '2018/04/02', '14:00');
+INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressTwo, date, startTime, , activityName, activityDate, activityStartTime) VALUES('venenatis.a.magna@Integer.net', 'Donec@velitPellentesque.net', '2018/04/02', '13:00', 'Hike to Beaver Lake', '2018/04/02', '13:00');
+INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressTwo, date, startTime, , activityName, activityDate, activityStartTime) VALUES('venenatis.a.magna@Integer.net', 'Donec@velitPellentesque.net', '2018/04/02', '13:00', 'Burgers for Lunch', '2018/04/02', '12:00');
+INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressTwo, date, startTime, , activityName, activityDate, activityStartTime) VALUES('Aenean.eget@ad.ca', 'imperdiet@enimSuspendisse.com','2018/04/16', '23:00', 'Clubbing at Cafe Campus', '2018/04/16', '23:00');
+INSERT INTO DateActivities (participantEmailAddressOne, participantEmailAddressTwo, date, startTime, , activityName, activityDate, activityStartTime) VALUES('tonyhawk50@hotmail.com', 'john.smith@gmail.com', '2018/04/16', '19:30', 'Dinner and Jazz', '2018/04/16', '19:30');
+
+INSERT INTO ActivityCategories VALUES('Burgers for Lunch', '2018/04/28', '12:30', food);
+INSERT INTO ActivityCategories VALUES('Burgers for Lunch', '2018/04/28', '12:30', cheap);
+INSERT INTO ActivityCategories VALUES('Biodome Visit', '2018/04/28', '14:30', nature);
+INSERT INTO ActivityCategories VALUES('Dinner and Jazz', '2018/04/16', '19:30', food);
+INSERT INTO ActivityCategories VALUES('Dinner and Jazz', '2018/04/16', '19:30', music);
+INSERT INTO ActivityCategories VALUES('Dinner and Jazz', '2018/04/16', '19:30', bar);
+INSERT INTO ActivityCategories VALUES('Skating on Beaver Lake', '2018/04/02', '14:00', fitness);
+INSERT INTO ActivityCategories VALUES('Skating on Beaver Lake', '2018/04/02', '14:00', nature);
+INSERT INTO ActivityCategories VALUES('Hike to Beaver Lake', '2018/04/02', '13:00', fitness);
+INSERT INTO ActivityCategories VALUES('Hike to Beaver Lake', '2018/04/02', '13:00', nature);
+INSERT INTO ActivityCategories VALUES('Hike to Beaver Lake', '2018/04/02', '13:00', cheap);
+INSERT INTO ActivityCategories VALUES('Burgers for Lunch', '2018/04/02', '12:00', food);
+INSERT INTO ActivityCategories VALUES('Burgers for Lunch', '2018/04/02', '12:00', cheap);
+INSERT INTO ActivityCategories VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', club);
+INSERT INTO ActivityCategories VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', music);
+INSERT INTO ActivityCategories VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', bar);
+INSERT INTO ActivityCategories VALUES('Breakfast Buffet', '2018/04/09', '09:00', food);
+
+INSERT INTO Reviews VALUES('82738', 'tonyhawk50@hotmail.com', '2018/04/16', '19:30', 'Dinner and Jazz', 'Great atmosphere and fantastic music. Food and drinks were pretty pricy, though.' '8');
+INSERT INTO Reviews VALUES('82790', 'imperdiet@enimSuspendisse.com','2018/04/16', '19:30', 'Dinner and Jazz', 'Music was boring and sub-par. Food and drinks were excellent, well worth the price.' '4');
+INSERT INTO Reviews VALUES('79688', 'Nulla.interdum@auctor.net','2018/04/09', '09:00', 'Breakfast Buffet', 'tasty foodz' '10');
+INSERT INTO Reviews VALUES('78402', 'venenatis.a.magna@Integer.net','2018/04/02', '13:00', 'Hike to Beaver Lake', 'Perfect weather, pefect length!' '9');
+INSERT INTO Reviews VALUES('85721', 'Curabitur.consequat.lectus@eterosProin.net','2018/04/28', '17:30', 'Biodome Visit', 'Those animals sure were animal-y! And the plants were exceedingly plant-y' '5');
+INSERT INTO Reviews VALUES('78503', 'tonyhawk50@hotmail.com', '2018/04/02', '13:00', 'Hike to Beaver Lake', 'Nothing compared to a good X-games.' '1');
+
+INSERT INTO VenueAvailibility VALUES('2018/04/28', '10:00', '23:00', 60);
+INSERT INTO VenueAvailibility VALUES('2018/04/28', '10:00', '18:00', 200);
+INSERT INTO VenueAvailibility VALUES('2018/04/16', '12:30', '02:00', 50);
+INSERT INTO VenueAvailibility VALUES('2018/04/02', '09:00', '21:00', 0);
+INSERT INTO VenueAvailibility VALUES('2018/04/02', '00:00', '23:59', 0);
+INSERT INTO VenueAvailibility VALUES('2018/04/02', '10:00', '23:00', 60);
+INSERT INTO VenueAvailibility VALUES('2018/04/16', '19:00', '04:00', 300);
+INSERT INTO VenueAvailibility VALUES('2018/04/09', '07:00', '11:00', 100);
+
+INSERT INTO VenueHasAvailability VALUES('977 Saint-Catherine St W', 'Burger King', '2018/04/28', '10:00', '23:00');
+INSERT INTO VenueHasAvailability VALUES('4777 Pierre-de Coubertin Ave', 'Biodome', '2018/04/28', '10:00', '18:00');
+INSERT INTO VenueHasAvailability VALUES('1254 Mackay St', 'Upstairs Jazz Bar', '2018/04/16', '12:30', '02:00');
+INSERT INTO VenueHasAvailability VALUES('Beaver Lake', 'Beaver Lake', '2018/04/02', '09:00', '21:00');
+INSERT INTO VenueHasAvailability VALUES('Mount Royal', 'Mount Royal', '2018/04/02', '00:00', '23:59');
+INSERT INTO VenueHasAvailability VALUES('625 Saint-Catherine St W', 'McDonalds', '2018/04/02', '10:00', '23:00');
+INSERT INTO VenueHasAvailability VALUES('57 Rue Prince Arthur E', 'Cafe Campus', '2018/04/16', '19:00', '04:00');
+INSERT INTO VenueHasAvailability VALUES('2055 Peel St', 'Universel Dejeuner Bar and Grill', '2018/04/09', '07:00', '11:00');
+
+
+
+
+
+
+
+
+
+
+
 
 END
