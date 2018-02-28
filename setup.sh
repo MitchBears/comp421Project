@@ -126,7 +126,7 @@ CREATE TABLE VenueHasAvailability (
 	startTime CHAR(5) NOT NULL,
 	endTime CHAR(5) NOT NULL,
 	FOREIGN KEY(address, venueName) REFERENCES Venues(address, name),
-	FOREIGN KEY(date, startTime, endTime) REFERENCES Availabilities(date, startTime, endTime),
+	FOREIGN KEY(date, startTime, endTime) REFERENCES VenueAvailabilities(date, startTime, endTime),
 	PRIMARY KEY(address, venueName, date, startTime, endTime)
 );
 
