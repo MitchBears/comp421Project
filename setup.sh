@@ -260,6 +260,9 @@ INSERT INTO Availabilities (date, startTime, endTime) VALUES ('2018/04/02', '00:
 INSERT INTO Availabilities (date, startTime, endTime) VALUES ('2018/04/02', '10:00', '23:00');
 INSERT INTO Availabilities (date, startTime, endTime) VALUES ('2018/04/16', '19:00', '04:00');
 INSERT INTO Availabilities (date, startTime, endTime) VALUES ('2018/04/09', '07:00', '11:00');
+INSERT INTO Availabilities VALUES ('2018-03-04', '00:00', '23:59');
+INSERT INTO Availabilities VALUES ('2018-03-04', '00:00', '14:00');
+INSERT INTO Availabilities VALUES ('2018-04-04', '10:00', '22:00');
 
 INSERT INTO UserAvailabilities (emailAddress, date, startTime, endTime) VALUES ('Donec.egestas@dis.org','2018/04/28','12:18', '17:51' );
 INSERT INTO UserAvailabilities (emailAddress, date, startTime, endTime) VALUES ('Donec.egestas@dis.org','2018/04/02', '15:35', '18:27');
@@ -278,6 +281,17 @@ INSERT INTO UserAvailabilities (emailAddress, date, startTime, endTime) VALUES (
 INSERT INTO UserAvailabilities (emailAddress, date, startTime, endTime) VALUES ('john.smith@gmail.com','2018/04/16', '18:39', '23:23');
 
 INSERT INTO UserAvailabilities (emailAddress, date, startTime, endTime) VALUES ('Nulla.interdum@auctor.net','2018/03/24', '16:18', '17:10');
+
+INSERT INTO UserAvailabilities VALUES('semper@eratvolutpatNulla.ca', '2018-03-15', '15:39', '20:41');
+INSERT INTO UserAvailabilities VALUES('semper@eratvolutpatNulla.ca', '2018-04-02', '11:32', '17:23');
+INSERT INTO UserAvailabilities VALUES('semper@eratvolutpatNulla.ca', '2018-04-04', '16:49', '21:53');
+INSERT INTO UserAvailabilities VALUES('semper@eratvolutpatNulla.ca', '2018-03-04', '13:29', '17:37');
+INSERT INTO UserAvailabilities VALUES('tristique@Aliquamrutrum.com', '2018-03-04', '13:35', '21:27');
+INSERT INTO UserAvailabilities VALUES('ultrices@nisidictumaugue.com', '2018-04-21', '14:26', '20:50');
+INSERT INTO UserAvailabilities VALUES('imperdiet@Duiselementum.net', '2018-04-04', '16:00', '21:50');
+INSERT INTO UserAvailabilities VALUES('non@Mauris.com', '2018-03-04', '13:35', '21:27');
+INSERT INTO UserAvailabilities VALUES('non@Mauris.com', '2018-04-17', '14:53', '20:08');
+INSERT INTO UserAvailabilities VALUES('penatibus.et@egestas.edu', '2018-04-04', '16:00', '21:50');
 
 INSERT INTO Venues (name, address) VALUES ('Universel Dejeuner Bar and Grill', '2055 Peel St');
 INSERT INTO Venues (name, address) VALUES ('McDonalds', '625 Saint-Catherine St W');
@@ -309,6 +323,10 @@ INSERT INTO Activities (name, date, startTime, endTime, address, venueName, pric
 INSERT INTO Activities (name, date, startTime, endTime, address, venueName, price) VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', '01:00', '57 Rue Prince Arthur E', 'Cafe Campus', 8);
 
 INSERT INTO Activities (name, date, startTime, endTime, address, venueName, price) VALUES('Breakfast Buffet', '2018/04/09', '09:00', '11:00', '2055 Peel St', 'Universel Dejeuner Bar and Grill', 20);
+
+INSERT INTO Activities VALUES ('Skating on Beaver Lake', '2018-03-04', '15:00', '17:00', 'Beaver Lake', 'Beaver Lake', 0);
+INSERT INTO Activities VALUES ('Hike to Beaver Lake', '2018-03-04', '9:00', '10:00', 'Mount Royal', 'Mount Royal', 0); 
+INSERT INTO Activities VALUES ('Free Pancake Day', '2018-04-04', '17:00', '21:00', '2055 Peel St', 'Universel Dejeuner Bar and Grill', 35); 
 
 
 INSERT INTO Categories (categoryName) VALUES('food');
@@ -357,6 +375,12 @@ INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VAL
 INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Clubbing at Cafe Campus', '2018/04/16', '23:00', 'dance');
 INSERT INTO ActivityCategories (activityName, date, startTime, categoryName) VALUES('Breakfast Buffet', '2018/04/09', '09:00', 'food');
 
+INSERT INTO ActivityCategories VALUES('Skating on Beaver Lake', '2018-03-04', '15:00', 'fitness');
+INSERT INTO ActivityCategories VALUES('Skating on Beaver Lake', '2018-03-04', '15:00', 'nature');
+INSERT INTO ActivityCategories VALUES('Hike on Mount Royal', '2018-03-04', '9:00', 'fitness');
+INSERT INTO ActivityCategories VALUES('Hike on Mount Royal', '2018-03-04', '9:00', 'nature');
+INSERT INTO ActivityCategories VALUES('Free Pancake Day', '2018-04-04', '17:00', 'food');
+
 INSERT INTO Reviews (reviewID, emailAddress, date, startTime, name, comments, rating) VALUES('82738', 'tonyhawk50@hotmail.com', '2018/04/16', '19:30', 'Dinner and Jazz', 'Great atmosphere and fantastic music. Food and drinks were pretty pricy, though.', 8);
 INSERT INTO Reviews (reviewID, emailAddress, date, startTime, name, comments, rating) VALUES('82790', 'imperdiet@enimSuspendisse.com','2018/04/16', '19:30', 'Dinner and Jazz', 'Music was boring and sub-par. Food and drinks were excellent, well worth the price.', 4);
 INSERT INTO Reviews (reviewID, emailAddress, date, startTime, name, comments, rating) VALUES('79688', 'Nulla.interdum@auctor.net','2018/04/09', '09:00', 'Breakfast Buffet', 'tasty foodz', 10);
@@ -372,6 +396,10 @@ INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('201
 INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/02', '10:00', '23:00', 60);
 INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/16', '19:00', '04:00', 300);
 INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/09', '07:00', '11:00', 100);
+INSERT INTO VenueAvailabilities VALUES('2018-03-04', '00:00', '23:59', NULL);
+INSERT INTO VenueAvailabilities VALUES('2018-03-04', '00:00', '14:00');
+INSERT INTO VenueAvailabilities VALUES('2018-04-04', '10:00', '22:00', 0);
+
 
 INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('977 Saint-Catherine St W', 'Burger King', '2018/04/28', '10:00', '23:00');
 INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('4777 Pierre-de Coubertin Ave', 'Biodome', '2018/04/28', '10:00', '18:00');
@@ -381,6 +409,9 @@ INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) 
 INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('625 Saint-Catherine St W', 'McDonalds', '2018/04/02', '10:00', '23:00');
 INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('57 Rue Prince Arthur E', 'Cafe Campus', '2018/04/16', '19:00', '04:00');
 INSERT INTO VenueHasAvailability (address, venueName, date, startTime, endTime) VALUES('2055 Peel St', 'Universel Dejeuner Bar and Grill', '2018/04/09', '07:00', '11:00');
+INSERT INTO VenueHasAvailability VALUES ('Beaver Lake', 'Beaver Lake', '2018-03-04', '00:00', '23:59');
+INSERT INTO VenueHasAvailability VALUES ('Mount Royal', 'Mount Royal', '2018-03-04', '00:00', '14:00');
+INSERT INTO VenueHasAvailability VALUES ('2055 Peel St','Universel Dejeuner Bar and Grill','2018-04-04', '10:00', '22:00');
 
 INSERT INTO UserPrefersCategory (emailAddress, categoryName) VALUES ('Donec.egestas@dis.org', 'cheap');
 INSERT INTO UserPrefersCategory (emailAddress, categoryName) VALUES ('Donec.egestas@dis.org', 'nature');
@@ -399,6 +430,11 @@ INSERT INTO UserPrefersCategory (emailAddress, categoryName) VALUES ('Aenean.ege
 INSERT INTO UserPrefersCategory (emailAddress, categoryName) VALUES ('tonyhawk50@hotmail.com', 'food');
 INSERT INTO UserPrefersCategory (emailAddress, categoryName) VALUES ('tonyhawk50@hotmail.com', 'sports');
 INSERT INTO UserPrefersCategory (emailAddress, categoryName) VALUES ('tonyhawk50@hotmail.com', 'fitness');
+INSERT INTO UserPrefersCategory VALUES('semper@eratvolutpatNulla.ca', 'fitness');
+INSERT INTO UserPrefersCategory VALUES('semper@eratvolutpatNulla.ca', 'food');
+INSERT INTO UserPrefersCategory VALUES('tristique@Aliquamrutrum.com', 'nature');
+INSERT INTO UserPrefersCategory VALUES('imperdiet@Duiselementum.net', 'food');
+INSERT INTO UserPrefersCategory VALUES('non@Mauris.com', 'club');
 
 
 
