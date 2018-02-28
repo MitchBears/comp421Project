@@ -367,8 +367,8 @@ INSERT INTO Reviews (reviewID, emailAddress, date, startTime, name, comments, ra
 INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/28', '10:00', '23:00', 60);
 INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/28', '10:00', '18:00', 200);
 INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/16', '12:30', '02:00', 50);
-INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/02', '09:00', '21:00', 0);
-INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/02', '00:00', '23:59', 0);
+INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/02', '09:00', '21:00', NULL);
+INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/02', '00:00', '23:59', NULL);
 INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/02', '10:00', '23:00', 60);
 INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/16', '19:00', '04:00', 300);
 INSERT INTO VenueAvailabilities (date, startTime, endTime, capacity) VALUES('2018/04/09', '07:00', '11:00', 100);
