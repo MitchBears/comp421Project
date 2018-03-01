@@ -7,8 +7,8 @@ CREATE TABLE Categories (
 
 CREATE TABLE Users (
     emailAddress VARCHAR(50) PRIMARY KEY NOT NULL,
-    gender VARCHAR(6),
-    genderPreference VARCHAR(6),
+    gender VARCHAR(6) CHECK(gender = 'Female' OR gender = 'Male' OR gender = 'Other'),
+    genderPreference VARCHAR(6) CHECK(genderPreference = 'Male' OR genderPreference = 'Female' OR genderPreference = 'Both' OR genderPreference = 'None'),
     age INT NOT NULL CHECK(age > 17),
     budget INT CHECK(budget > 0),
     phoneNumber CHAR(14) NOT NULL,
@@ -260,9 +260,9 @@ INSERT INTO Availabilities (date, startTime, endTime) VALUES ('2018/04/02', '00:
 INSERT INTO Availabilities (date, startTime, endTime) VALUES ('2018/04/02', '10:00', '23:00');
 INSERT INTO Availabilities (date, startTime, endTime) VALUES ('2018/04/16', '19:00', '04:00');
 INSERT INTO Availabilities (date, startTime, endTime) VALUES ('2018/04/09', '07:00', '11:00');
-INSERT INTO Availabilities VALUES ('2018-03-04', '00:00', '23:59');
-INSERT INTO Availabilities VALUES ('2018-03-04', '00:00', '14:00');
-INSERT INTO Availabilities VALUES ('2018-04-04', '10:00', '22:00');
+INSERT INTO Availabilities (date, startTime, endTime) VALUES ('2018-03-04', '00:00', '23:59');
+INSERT INTO Availabilities (date, startTime, endTime) VALUES ('2018-03-04', '00:00', '14:00');
+INSERT INTO Availabilities (date, startTime, endTime) VALUES ('2018-04-04', '10:00', '22:00');
 
 INSERT INTO UserAvailabilities (emailAddress, date, startTime, endTime) VALUES ('Donec.egestas@dis.org','2018/04/28','12:18', '17:51' );
 INSERT INTO UserAvailabilities (emailAddress, date, startTime, endTime) VALUES ('Donec.egestas@dis.org','2018/04/02', '15:35', '18:27');
@@ -438,23 +438,6 @@ INSERT INTO UserPrefersCategory (emailAddress, categoryName) VALUES('semper@erat
 INSERT INTO UserPrefersCategory (emailAddress, categoryName) VALUES('tristique@Aliquamrutrum.com', 'nature');
 INSERT INTO UserPrefersCategory (emailAddress, categoryName) VALUES('imperdiet@Duiselementum.net', 'food');
 INSERT INTO UserPrefersCategory (emailAddress, categoryName) VALUES('non@Mauris.com', 'club');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 END
